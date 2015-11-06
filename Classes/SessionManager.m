@@ -171,8 +171,10 @@
     [newPacket appendBytes:&swappedType length:sizeof(uint32_t)];
     [newPacket appendData:data];
     NSError *error;
-  	if (![myGKSession sendData:newPacket toPeers:[NSArray arrayWithObject:currentConfPeerID] withDataMode:GKSendDataReliable error:&error]) {
-        NSLog(@"%@",[error localizedDescription]);
+    if (currentConfPeerID) {
+        if (![myGKSession sendData:newPacket toPeers:[NSArray arrayWithObject:currentConfPeerID] withDataMode:GKSendDataReliable error:&error]) {
+            NSLog(@"%@",[error localizedDescription]);
+        }
     }
 }
 
